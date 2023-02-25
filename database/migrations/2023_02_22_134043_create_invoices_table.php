@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedInteger("campanyId")->foreign()->references('id')->on("companies")->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedInteger("campanyId")->foreign()->references('id')->on("companies");
             $table->unsignedInteger("deliveryGuyId")->foreign()->references('id')->on("delivery_guys");
             $table->boolean("isPaid");
             $table->decimal("delivaryFees",4,3);
@@ -39,8 +39,8 @@ return new class extends Migration
      *
      * @return void
      */
-    // public function down()
-    // {
-    //     Schema::dropIfExists('invoices');
-    // }
+    public function down()
+    {
+        Schema::dropIfExists('invoices');
+    }
 };
